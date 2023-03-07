@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Type Ahead 👀</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="https://fav.farm/🔥" />
+  </head>
+  <body>
+    <form class="search-form">
+      <input type="text" class="search" placeholder="City or State" />
+      <ul class="suggestions">
+        <li>Filter for a city</li>
+        <li>or a state</li>
+      </ul>
+    </form>
+    <script>
+      const endpoint =
+        "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+      const cities = [];
+
+      // fetching huge array's data form third-party api
+      fetch(endpoint)
+        .then((prom) => prom.json())
+        .then((data) => cities.push(...data)); // here, we push the fetched data to our cities array using destructuring method.
+
+      // function for finding the match(city or state) from the array source
+      function findMatches(wordToFind, array) {
+        return array.filter((data) => {
+          const regex = new RegExp(wordToFind, "gi"); // here, creating a RegExp pattern
+          return data.city.match(regex) || data.state.match(regex); // return the matched city or state
+        });
+      }
+
+      const searchInput = document.querySelector(".search");
+      const suggestions = document.querySelector(".suggestions");
+
+      function displayMatches() {
+        const matchArray = findMatches(this.value, cities);
+        const html = matchArray
+          .map((place) => {
+            const regex = new RegExp(this.value, "gi");
+            const highlightedCity = place.city.replace(
+              regex,
+              `<span class="hl">${this.value}</span>`
+            );
+            const highlightedState = place.state.replace(
+              regex,
+              `<span class="hl">${this.value}</span>`
+            );
+
+            return `
+                <li>
+                   <span class="name"> ${highlightedCity}, ${highlightedState} </span>
+                    <span class="population"> ${place.population} </span>
+                </li>
+            `;
+          })
+          .join("");
+        suggestions.innerHTML = html;
+      }
+
+      searchInput.addEventListener("change", displayMatches);
+      searchInput.addEventListener("keyup", displayMatches);
+    </script>
+  </body>
+</html>

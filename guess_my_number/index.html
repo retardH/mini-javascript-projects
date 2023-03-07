@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Guess My Number</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <button class="btn again-btn">Again!</button>
+        <span>Between 1 and 20</span>
+      </header>
+
+      <main>
+        <h1>Guess My Number</h1>
+        <div class="guess-result-box">?</div>
+      </main>
+
+      <footer>
+        <div class="result-box-container">
+          <input type="number" class="input-box" />
+          <button class="btn check-btn">Check</button>
+        </div>
+
+        <aside class="text-section">
+          <h4 class="message">Start guessing...</h4>
+          <h4 class="score-text">Score: <span class="score-value">20</span></h4>
+          <h4 class="highest-score-text">
+            Highest score: <span class="highest-score-value">0</span>
+          </h4>
+        </aside>
+      </footer>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
